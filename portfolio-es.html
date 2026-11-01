@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Editor de videos de highlights de fútbol · Santiago Barberena</title>
+<meta name="theme-color" content="#0a3524">
+<meta name="description" content="Videos de highlights personalizados para jugadores y jugadoras de fútbol de todas las edades. Edición para YouTube, Reels y TikTok.">
+<meta property="og:title" content="Editor de videos de highlights de fútbol · Santiago Barberena"><meta property="og:description" content="Videos de highlights personalizados para jugadores y jugadoras de fútbol de todas las edades. Edición para YouTube, Reels y TikTok."><meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚽</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#062117;--bg2:#0a2e20;--line:rgba(255,255,255,.16);--ink:#f6f8f3;--mute:#a8c0b2;--gold:#f0c85a;--d:'Barlow Condensed','Arial Narrow',sans-serif;--b:'Barlow',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--d);font-weight:800;line-height:.95;letter-spacing:-.01em}
+h2{font-size:clamp(40px,6vw,68px);margin-bottom:20px}
+section{padding:96px 0;border-top:1px solid var(--line)}
+.lead{color:var(--mute);max-width:56ch;font-size:18px}
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:20;background:rgba(6,33,23,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{text-decoration:none;font:800 24px/1 var(--d);letter-spacing:.01em;white-space:nowrap}
+.brand small{display:block;font:500 12px/1.2 var(--b);color:var(--gold);letter-spacing:.02em;margin-top:2px}
+.links{display:flex;gap:28px;align-items:center;font-size:15px;font-weight:500}
+.links a{text-decoration:none;color:var(--mute)}.links a:hover{color:var(--ink)}
+.lang{display:flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;font:600 13px var(--b)}
+.lang a,.lang span{padding:6px 12px;text-decoration:none;color:var(--mute)}.lang span{background:var(--ink);color:var(--bg)}
+.btn{display:inline-block;background:var(--ink);color:var(--bg)!important;font:700 17px var(--b);padding:14px 26px;border-radius:99px;text-decoration:none;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-2px);background:var(--gold)}
+.btn.ghost{background:none;color:var(--ink)!important;border:1px solid var(--line)}.btn.ghost:hover{background:rgba(255,255,255,.08)}
+nav .btn{padding:9px 18px;font-size:15px}
+/* hero */
+.hero{padding:140px 0 88px;border:0;position:relative;overflow:hidden}
+.pitch{position:absolute;inset:0;opacity:.5;pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+h1{font-size:clamp(56px,9.5vw,128px);margin-bottom:28px;text-transform:uppercase}
+.hero .lead{margin-bottom:34px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.where{display:flex;gap:10px 22px;flex-wrap:wrap;color:var(--mute);font-size:15px}
+.where b{color:var(--ink);font-weight:600}
+.frames{position:relative;height:420px}
+.fr{position:absolute;border:2px solid var(--ink);border-radius:14px;background:linear-gradient(160deg,#0f4a31,#0a2e20);overflow:hidden}
+.fr svg{position:absolute;inset:0;width:100%;height:100%}
+.fr i{position:absolute;left:12px;bottom:10px;font:600 12px var(--b);font-style:normal;background:var(--bg);padding:3px 9px;border-radius:99px}
+.fr .rec{position:absolute;top:12px;right:12px;width:10px;height:10px;border-radius:50%;background:#ff5a4f;animation:b 1.6s infinite}
+.land{left:0;top:30px;width:92%;aspect-ratio:16/9}
+.port{right:0;bottom:0;width:38%;aspect-ratio:9/16;border-color:var(--gold);box-shadow:-18px 18px 0 var(--bg)}
+.scrub{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--line)}.scrub b{display:block;width:64%;height:100%;background:var(--gold)}
+@keyframes b{50%{opacity:.2}}
+/* work */
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.v{text-decoration:none;display:block}
+.th{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:linear-gradient(160deg,#0f4a31,#0a2e20);border:1px solid var(--line)}
+.th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.v:hover img{transform:scale(1.04)}
+.play{position:absolute;left:50%;top:50%;width:64px;height:64px;margin:-32px;border-radius:50%;background:var(--ink);display:grid;place-items:center}
+.play:after{content:"";border-left:18px solid var(--bg);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.meta{display:flex;justify-content:space-between;gap:12px;padding-top:14px;align-items:baseline}
+.meta h3{font-size:34px}.meta span{color:var(--mute);font-size:15px;text-align:right}
+.pl{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border:1px dashed var(--gold);border-radius:12px;padding:26px 28px;text-decoration:none}
+.pl h3{font-size:34px}.pl p{color:var(--mute)}
+/* audience + services */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.two>div{padding:36px}.two>div+div{border-left:1px solid var(--line);background:var(--bg2)}
+.two h3{font-size:38px;margin-bottom:12px}.two p{color:var(--mute)}
+.svc{display:grid;grid-template-columns:repeat(3,1fr);margin-top:44px}
+.svc>div{padding:8px 32px 8px 0}.svc>div+div{padding-left:32px;border-left:1px solid var(--line)}
+.svc h3{font-size:36px;margin-bottom:12px}.svc p{color:var(--mute)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}.tags span{border:1px solid var(--line);border-radius:99px;padding:6px 16px;font-size:15px;color:var(--mute)}
+/* quotes */
+.q{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:44px}
+.q figure{padding:36px 36px 36px 0;border-top:1px solid var(--line)}.q figure:nth-child(even){padding:36px 0 36px 36px;border-left:1px solid var(--line)}
+blockquote{font:700 clamp(26px,3vw,34px)/1.1 var(--d);margin-bottom:18px}
+figcaption{color:var(--mute);font-size:15px}figcaption b{color:var(--gold);font-weight:600;display:block}
+/* contact */
+.contact{background:var(--ink);color:var(--bg);border:0}
+.contact h2{font-size:clamp(52px,9vw,120px)}
+.contact .lead{color:#1d4a37}
+.contact .btn{background:var(--bg);color:var(--ink)!important}.contact .btn:hover{background:#0f4a31}
+.contact .btn.ghost{background:none;color:var(--bg)!important;border-color:rgba(6,33,23,.35)}
+footer{padding:28px 0;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:860px){
+ .links a:not(.btn){display:none}.links{gap:10px}
+ .hero{padding-top:110px}.hero .wrap{grid-template-columns:1fr}.frames{height:340px}
+ .vgrid,.two,.q{grid-template-columns:1fr}.two>div+div{border-left:0;border-top:1px solid var(--line)}
+ .svc{grid-template-columns:1fr;gap:28px}.svc>div,.svc>div+div{padding:0 0 0 0;border:0;border-top:1px solid var(--line);padding-top:24px}
+ .q figure,.q figure:nth-child(even){padding:28px 0;border-left:0}
+ section{padding:72px 0}.brand small{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+body:before{content:"";position:fixed;inset:0;z-index:50;pointer-events:none;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--gold);z-index:60}
+nav{inset:12px 12px auto;max-width:1160px;margin:0 auto;border:1px solid var(--line);border-radius:99px;background:rgba(10,46,32,.72)}
+nav .wrap{padding:0 10px 0 24px}
+.glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(520px circle at var(--mx,70%) var(--my,30%),rgba(240,200,90,.13),transparent 60%)}
+h1 .l{display:block;overflow:hidden;padding-bottom:.06em}h1 .l span{display:block;transform:translateY(105%);animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .l:nth-child(2) span{animation-delay:.1s}h1 .l:nth-child(3) span{animation-delay:.2s}
+@keyframes up{to{transform:none}}
+.fr{transition:transform .25s ease-out;will-change:transform}
+.tl{position:relative;margin-top:44px;padding-top:26px}
+.tl:before{content:"";position:absolute;left:0;right:0;top:34px;height:2px;background:var(--line)}
+.tl:after{content:"";position:absolute;top:26px;left:0;width:2px;height:18px;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:ph 7s linear infinite}
+@keyframes ph{to{left:100%}}
+.tl ul{display:flex;justify-content:space-between;list-style:none;position:relative}
+.tl li{font-size:13px;color:var(--mute);padding-top:20px;position:relative}
+.tl li:before{content:"";position:absolute;top:2px;left:0;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--gold)}
+.tl li b{display:block;color:var(--ink);font:700 22px/1 var(--d);letter-spacing:.02em}
+.mq{overflow:hidden;border-block:1px solid var(--line);background:var(--bg2);padding:18px 0}
+.mq div{display:flex;gap:56px;width:max-content;animation:mq 32s linear infinite;font:700 30px/1 var(--d);letter-spacing:.04em;color:var(--mute)}
+.mq span:nth-child(even){color:var(--gold)}
+@keyframes mq{to{transform:translateX(-50%)}}
+section.mqs{padding:0;border:0}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:44px}
+.cell{border:1px solid var(--line);border-radius:22px;padding:32px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.cell:hover{border-color:rgba(240,200,90,.6);transform:translateY(-3px)}
+.cell h3{font-size:40px;margin-bottom:12px}.cell p{color:var(--mute)}
+.c6{grid-column:span 6}.c3{grid-column:span 3}.c4{grid-column:span 4}
+.cell.big{min-height:260px}.cell.big:after{content:"";position:absolute;right:-60px;bottom:-60px;width:200px;height:200px;border:2px solid var(--line);border-radius:50%}
+.cell.gold{background:var(--gold);color:var(--bg);border:0}.cell.gold p{color:#4a3a0a}
+.num{font:800 clamp(56px,7vw,88px)/.9 var(--d)}.stat p{margin-top:8px;font-size:15px}
+.svc.bento .cell{padding:30px}.svc.bento .cell h3{font-size:34px}
+.steps{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:start}
+.steps h2{position:sticky;top:96px}
+.st{display:grid;grid-template-columns:72px 1fr;gap:18px;padding:28px 0;border-top:1px solid var(--line)}
+.st b{font:800 56px/.9 var(--d);color:var(--gold)}.st h3{font-size:34px;margin-bottom:6px}.st p{color:var(--mute)}
+.v:first-child{grid-column:1/-1}
+@media(min-width:861px){.v:first-child .th{aspect-ratio:21/9}.v:first-child h3{font-size:46px}}
+.th em{position:absolute;left:14px;top:14px;z-index:2;font:600 13px var(--b);font-style:normal;background:rgba(6,33,23,.82);backdrop-filter:blur(6px);border:1px solid var(--line);padding:5px 12px;border-radius:99px}
+.th:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,33,23,.55),transparent 55%)}
+.play{z-index:2;transition:transform .3s}.v:hover .play{transform:scale(1.15)}
+.v:hover .th{border-color:var(--gold)}
+.q figure{position:relative}.q figure:before{content:"“";position:absolute;right:24px;top:6px;font:800 120px/1 var(--d);color:var(--gold);opacity:.25}
+.q figure:nth-child(even):before{right:0}
+.contact .copy{cursor:pointer;border:1px solid rgba(6,33,23,.35);background:none;color:var(--bg);font:600 15px var(--b);padding:14px 22px;border-radius:99px}
+@media(max-width:860px){nav{inset:8px 8px auto}.c6,.c3,.c4{grid-column:span 12}.c3{grid-column:span 6}.cell{padding:26px}.steps{grid-template-columns:1fr;gap:24px}.steps h2{position:static}.tl li{font-size:12px}.tl li b{font-size:18px}.mq div{font-size:24px}nav .btn{display:inline-block}}
+
+:root{--bg:#0a3524;--bg2:#0f4a31}
+.hero{background:radial-gradient(900px 500px at 85% 20%,#1a6a45,transparent 65%),linear-gradient(180deg,#0f4a31,#0a3524)}
+.fr{background:#0f4a31}.fr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fr:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,33,23,.6),transparent 55%)}
+.fr .play,.fr i{z-index:2}.fr .play{width:52px;height:52px;margin:-26px}.fr .play:after{border-left-width:14px;border-top-width:9px;border-bottom-width:9px}
+.fr:hover{border-color:var(--gold)}
+.mid{background:#14603f;border:0}.light{background:#eef3ec;color:#062117;border:0}
+.light .lead,.light .cell p,.light .meta span{color:#3b5f4d}.light .tags span{color:#3b5f4d;border-color:rgba(6,33,23,.25)}
+.light .cell{background:#fff;border-color:rgba(6,33,23,.12)}.light .th{border-color:rgba(6,33,23,.15)}
+.light .v:hover .th{border-color:#0a3524}
+.mid .cell{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22)}.mid .cell p{color:#cfe3d7}
+.mid .cell.gold{background:var(--gold);color:#062117;border:0}.mid .cell.gold p{color:#4a3a0a}
+.c12{grid-column:span 12}.cell.gold h3{font-size:clamp(34px,4.5vw,52px)}
+@media(max-width:860px){.c12{grid-column:span 12}.frames{height:360px}}
+
+:root{--fv:#1dbf73}
+body{overflow-wrap:break-word}
+h1{font-size:clamp(52px,7.4vw,112px)}
+@media(max-width:860px){h1{font-size:clamp(38px,11vw,80px)}}
+.proof{margin:0 0 30px;padding-left:16px;border-left:3px solid var(--gold);max-width:46ch;color:var(--ink);font-size:17px;line-height:1.45}
+.proof span{display:block;margin-top:6px;font-size:14px;color:var(--mute)}
+.btn.fv{background:var(--fv);color:#04210f!important}.btn.fv:hover{background:#4ee09a}
+.fvline{margin-top:20px;color:#1d4a37;font-size:16px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--gold);color:#062117;padding:10px 16px;border-radius:99px;font-weight:600;text-decoration:none}.skip:focus{top:12px}
+.lb{position:fixed;inset:0;z-index:90;background:rgba(3,16,10,.92);display:none;align-items:center;justify-content:center;padding:20px}
+.lb.on{display:flex}.lb div{width:min(1000px,100%);aspect-ratio:16/9;position:relative}
+.lb iframe{width:100%;height:100%;border:0;border-radius:12px}
+.lb button{position:absolute;right:0;top:-52px;background:none;border:1px solid var(--line);color:var(--ink);width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer}
+footer a{color:var(--mute)}footer a:hover{color:var(--ink)}
+.meta span{font-size:14px}
+
+.about{background:var(--bg)}
+.about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:center}
+.pc{position:relative;max-width:360px;width:100%;aspect-ratio:4/5;border:2px solid var(--ink);border-radius:20px;overflow:hidden;background:radial-gradient(120% 80% at 70% 0%,#1d7a52,#0f4a31 55%,#0a3524);box-shadow:14px 14px 0 rgba(240,200,90,.9);transform:rotate(-2deg);transition:transform .4s}
+.pc:hover{transform:rotate(0)}
+.pc svg{position:absolute;inset:0;width:100%;height:100%}
+.pc .ini{position:absolute;left:0;right:0;top:12%;text-align:center;font:800 clamp(120px,16vw,190px)/1 var(--d);letter-spacing:-.02em;color:var(--ink)}
+.pc .tag{position:absolute;top:16px;left:16px;font:600 13px var(--b);background:var(--bg);border:1px solid var(--line);padding:5px 12px;border-radius:99px;color:var(--gold)}
+.pc .pn{position:absolute;left:0;right:0;bottom:0;padding:20px 22px;background:linear-gradient(to top,rgba(6,33,23,.95),rgba(6,33,23,.2))}
+.pc .pn b{display:block;font:800 30px/1 var(--d);text-transform:uppercase}.pc .pn span{font-size:14px;color:var(--mute)}
+.about h2{margin-bottom:16px}.about .big{font:700 clamp(24px,3vw,32px)/1.15 var(--d);margin-bottom:20px}
+.about p{color:var(--mute);margin-bottom:16px;max-width:58ch}
+.about .chips{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 28px}.about .chips span{border:1px solid var(--line);border-radius:99px;padding:6px 16px;font-size:15px}
+@media(max-width:860px){.about .wrap{grid-template-columns:1fr;gap:44px}.pc{margin:0 auto 8px;max-width:300px}.brand small{display:block;font-size:11px;margin-top:1px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Saltar al contenido</a>
+<nav><div class="wrap">
+ <a class="brand" href="#top">Santiago Barberena<small>@santiagosocceredits</small></a>
+ <div class="links"><a href="#work">Trabajo</a><a href="#about">Sobre mí</a><a href="#services">Servicios</a><a href="#reviews">Testimonios</a>
+  <a class="btn" href="#contact">Contactarme</a></div>
+</div></nav>
+
+<div id="bar"></div>
+<header class="hero" id="top">
+ <div class="glow"></div>
+ <svg class="pitch" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="2" aria-hidden="true"><circle cx="840" cy="350" r="150"/><line x1="840" y1="-20" x2="840" y2="720"/><circle cx="840" cy="350" r="5" fill="#fff"/><rect x="1060" y="190" width="200" height="320"/><rect x="1160" y="270" width="80" height="160"/></svg>
+ <div class="wrap">
+  <div>
+   <h1><span class="l"><span>Tus mejores</span></span><span class="l"><span>jugadas, editadas</span></span><span class="l"><span>para que te vean</span></span></h1>
+   <p class="lead">Videos de highlights personalizados para jugadores y jugadoras de fútbol de todas las edades: para YouTube, Reels y TikTok, y para enviar directo a entrenadores universitarios.</p>
+   <p class="proof">“Excelente entrega, excelente comunicación, ¡voy a seguir contratándolo!”<span>Lee · padre de jugadores sub 9 y sub 12, FQAL</span></p>
+   <div class="cta"><a class="btn" href="#contact">Pedir mi video</a><a class="btn ghost" href="#work">Ver trabajos</a></div>
+  </div>
+  <div class="frames">
+   <a class="fr land" href="https://www.youtube.com/watch?v=aldxpp4ujmU" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/aldxpp4ujmU/hqdefault.jpg" alt="Iker" onerror="this.remove()"><span class="play"></span><i>Iker · España</i></a>
+   <a class="fr port" href="https://www.youtube.com/watch?v=8MQmgmflX6o" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/8MQmgmflX6o/hqdefault.jpg" alt="Leo" onerror="this.remove()"><span class="play"></span><i>Leo · California</i></a>
+  </div>
+ </div>
+ <div class="wrap"><div class="tl" aria-hidden="true"><ul><li><b>Iker</b>España</li><li><b>Leo</b>Estados Unidos</li><li><b>Sultan</b>Estados Unidos</li><li><b>Ollie</b>Australia</li></ul></div></div>
+</header>
+<div class="mq" aria-hidden="true"><div><span>UPSL</span><span>FQAL</span><span>DHJ</span><span>YouTube</span><span>Reels</span><span>TikTok</span><span>Reclutamiento universitario</span><span>UPSL</span><span>FQAL</span><span>DHJ</span><span>YouTube</span><span>Reels</span><span>TikTok</span><span>Reclutamiento universitario</span></div></div>
+
+<section id="work" class="light"><div class="wrap">
+ <h2>Últimos highlights</h2><p class="lead">Videos editados para jugadores de España, Estados Unidos y Australia. Abrí cualquiera y mirá el primer minuto.</p>
+ <div class="vgrid"><a class="v" href="https://www.youtube.com/watch?v=aldxpp4ujmU" target="_blank" rel="noopener"><div class="th"><img src="https://img.youtube.com/vi/aldxpp4ujmU/hqdefault.jpg" alt="Iker" loading="lazy" onerror="this.remove()"><em>España · DHJ</em><span class="play"></span></div><div class="meta"><h3>Iker</h3><span>YouTube</span></div></a><a class="v" href="https://www.youtube.com/watch?v=8MQmgmflX6o" target="_blank" rel="noopener"><div class="th"><img src="https://img.youtube.com/vi/8MQmgmflX6o/hqdefault.jpg" alt="Leo" loading="lazy" onerror="this.remove()"><em>Estados Unidos · California</em><span class="play"></span></div><div class="meta"><h3>Leo</h3><span>YouTube</span></div></a><a class="v" href="https://www.youtube.com/watch?v=a4lncUuLPXE" target="_blank" rel="noopener"><div class="th"><img src="https://img.youtube.com/vi/a4lncUuLPXE/hqdefault.jpg" alt="Sultan" loading="lazy" onerror="this.remove()"><em>Estados Unidos · Georgia</em><span class="play"></span></div><div class="meta"><h3>Sultan</h3><span>YouTube</span></div></a><a class="v" href="https://www.youtube.com/watch?v=_KOHneQZbGs" target="_blank" rel="noopener"><div class="th"><img src="https://img.youtube.com/vi/_KOHneQZbGs/hqdefault.jpg" alt="Ollie" loading="lazy" onerror="this.remove()"><em>Australia · FQAL</em><span class="play"></span></div><div class="meta"><h3>Ollie</h3><span>YouTube</span></div></a>
+ </div>
+</div></section>
+
+<section id="about" class="about"><div class="wrap">
+ <!-- Para poner una foto real / to use a real photo: reemplazar .ini por <img src="foto.jpg" alt="Santiago Barberena" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"> -->
+ <div class="pc" aria-hidden="true"><svg viewBox="0 0 100 125" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width=".6"><circle cx="50" cy="62" r="18"/><line x1="0" y1="62" x2="100" y2="62"/><rect x="25" y="0" width="50" height="20"/><rect x="25" y="105" width="50" height="20"/></svg><span class="tag">@santiagosocceredits</span><div class="ini">SB</div><div class="pn"><b>Santiago Barberena</b><span>Editor de highlights · YouTube · Reels · TikTok</span></div></div>
+ <div><h2>Sobre mí</h2><p class="big">Soy Santiago Barberena, editor de videos de highlights para jugadores de fútbol.</p><p>Edito videos para YouTube, Reels y TikTok. Es edición personalizada para jugadores y jugadoras de todas las edades, especialmente para universitarios de Estados Unidos.</p><p>Trabajo con padres que necesitan resúmenes de sus hijos para enviar a entrenadores, y con jugadores que buscan club o quieren un resumen de sus mejores jugadas.</p>
+ <div class="chips"><span>YouTube</span><span>Reels</span><span>TikTok</span></div>
+ <a class="btn" href="#contact">Contactarme</a></div>
+</div></section>
+
+<section id="for" class="mid"><div class="wrap">
+ <h2>Para quién edito</h2>
+ <div class="bento">
+  <div class="cell big c6"><h3>Padres</h3><p>Tu hijo juega en la universidad o en categorías inferiores y necesita un resumen para enviar a entrenadores. Vos mandás los partidos, yo entrego el video.</p></div>
+  <div class="cell big c6"><h3>Jugadores</h3><p>Buscás club, o simplemente querés un resumen de tus mejores jugadas para compartir y guardar.</p></div>
+  <div class="cell gold c12"><h3>Especialmente jugadores universitarios de Estados Unidos</h3><p>Videos de highlights pensados para enviar a entrenadores universitarios.</p></div>
+  <div class="cell stat c3"><div class="num">3</div><p>Países</p></div>
+  <div class="cell stat c3"><div class="num">3</div><p>Ligas</p></div>
+  <div class="cell stat c3"><div class="num">U9+</div><p>De sub 9 a universidad</p></div>
+  <div class="cell stat c3"><div class="num">M/F</div><p>Masculino y femenino</p></div>
+ </div>
+</div></section>
+
+<section id="services" class="light"><div class="wrap">
+ <h2>Qué recibís</h2><p class="lead">Edición de video personalizada para jugadores y jugadoras.</p>
+ <div class="bento svc"><div class="cell c6"><h3>Resúmenes de jugadas</h3><p>Videos de highlights completos para YouTube, con las mejores jugadas de un partido o de una temporada.</p></div><div class="cell c6"><h3>Reels y TikToks</h3><p>Cortes verticales cortos con las mejores jugadas, listos para redes sociales.</p></div></div>
+</div></section>
+
+<section id="reviews"><div class="wrap">
+ <h2>Lo que dicen mis clientes</h2>
+ <div class="q"><figure><blockquote>“Es la segunda vez que lo contrato y lo volveré a hacer”</blockquote><figcaption><b>Padre de jugador sub 15</b>United Premier Soccer League (UPSL) · California</figcaption></figure><figure><blockquote>“Excelente entrega, excelente comunicación, ¡voy a seguir contratándolo! Increíble trabajo como siempre.”</blockquote><figcaption><b>Lee, padre de jugadores sub 9 y sub 12</b>Football Queensland Academy League (FQAL) · Queensland</figcaption></figure><figure><blockquote>“El partido 2 está muy bien, creo que es el que mejor me has editado”</blockquote><figcaption><b>Sultan, jugador sub 18</b>United Premier Soccer League (UPSL) · Georgia</figcaption></figure><figure><blockquote>“Trabajo excepcional: pedí un video de jugadas y quedó mejor de lo que esperaba”</blockquote><figcaption><b>Rafa, hermano de jugador sub 20</b>División de Honor Juvenil (DHJ) · Andalucía</figcaption></figure></div>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+ <h2>Mandame tus partidos</h2><p class="lead">Contame quién es el jugador, qué partidos y dónde se va a usar el video. De ahí me encargo yo.</p>
+ <div class="cta" style="margin-top:32px">
+  <a class="btn" href="mailto:santiagobarberena2002@gmail.com">santiagobarberena2002@gmail.com</a>
+  <button class="copy" id="cp" data-ok="Copiado">Copiar correo</button>
+  <a class="btn fv" data-fiverr href="#contact">Contratarme por Fiverr</a>
+ </div>
+ <p class="fvline">También podés contratarme por Fiverr.</p>
+</div></section>
+<footer><div class="wrap"><span>© 2026 Santiago Barberena · santiagosocceredits</span><span><a href="mailto:santiagobarberena2002@gmail.com">Email</a> · <a data-fiverr href="#contact">Fiverr</a></span></div></footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true"><div><button aria-label="Cerrar video">✕</button><iframe id="lbf" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Video"></iframe></div></div>
+<script>
+const r=document.documentElement,h=document.querySelector('.hero'),fr=[...document.querySelectorAll('.fr')];
+h.addEventListener('pointermove',e=>{const b=h.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top;h.style.setProperty('--mx',x+'px');h.style.setProperty('--my',y+'px');const px=x/b.width-.5,py=y/b.height-.5;fr.forEach((f,i)=>f.style.transform=`translate(${px*(i?-18:14)}px,${py*(i?-18:14)}px)`)});
+addEventListener('scroll',()=>{document.getElementById('bar').style.width=(scrollY/(r.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+const cp=document.getElementById('cp');cp.onclick=()=>{const t=cp.textContent;navigator.clipboard&&navigator.clipboard.writeText('santiagobarberena2002@gmail.com').then(()=>{cp.textContent=cp.dataset.ok;setTimeout(()=>cp.textContent=t,1800)})};
+
+const FIVERR='';/* ← pegar acá el link de Fiverr / paste your Fiverr URL here */
+document.querySelectorAll('[data-fiverr]').forEach(a=>{if(FIVERR){a.href=FIVERR;a.target='_blank';a.rel='noopener'}});
+const lb=document.getElementById('lb'),fm=document.getElementById('lbf');let last;
+function shut(){lb.classList.remove('on');fm.src='';last&&last.focus()}
+document.querySelectorAll('a.v,a.fr').forEach(a=>a.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey)return;const m=a.href.match(/v=([\w-]{11})/);if(!m)return;e.preventDefault();last=a;fm.src='https://www.youtube-nocookie.com/embed/'+m[1]+'?autoplay=1&rel=0';lb.classList.add('on');lb.querySelector('button').focus()}));
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.tagName==='BUTTON')shut()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('on'))shut()});
+</script>
+</body></html>
