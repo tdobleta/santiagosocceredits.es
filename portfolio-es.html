@@ -132,7 +132,7 @@ section.mqs{padding:0;border:0}
 .st b{font:800 56px/.9 var(--d);color:var(--gold)}.st h3{font-size:34px;margin-bottom:6px}.st p{color:var(--mute)}
 .v:first-child{grid-column:1/-1}
 @media(min-width:861px){.v:first-child .th{aspect-ratio:21/9}.v:first-child h3{font-size:46px}}
-.th em{position:absolute;left:14px;top:14px;z-index:2;font:600 13px var(--b);font-style:normal;background:rgba(6,33,23,.82);backdrop-filter:blur(6px);border:1px solid var(--line);padding:5px 12px;border-radius:99px}
+.th em{color:#fff;position:absolute;left:14px;top:14px;z-index:2;font:600 13px var(--b);font-style:normal;background:rgba(6,33,23,.82);backdrop-filter:blur(6px);border:1px solid var(--line);padding:5px 12px;border-radius:99px}
 .th:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(6,33,23,.55),transparent 55%)}
 .play{z-index:2;transition:transform .3s}.v:hover .play{transform:scale(1.15)}
 .v:hover .th{border-color:var(--gold)}
@@ -255,13 +255,13 @@ footer a{color:var(--mute)}footer a:hover{color:var(--ink)}
 <section class="contact" id="contact"><div class="wrap">
  <h2>Mandame tus partidos</h2><p class="lead">Contame quién es el jugador, qué partidos y dónde se va a usar el video. De ahí me encargo yo.</p>
  <div class="cta" style="margin-top:32px">
-  <a class="btn" href="mailto:santiagobarberena2002@gmail.com">santiagobarberena2002@gmail.com</a>
+  <a class="btn" href="mailto:santiagobarberena2002@gmail.com?body=Hola%2C%20estoy%20interesado%20en%20tu%20servicio%21">santiagobarberena2002@gmail.com</a>
   <button class="copy" id="cp" data-ok="Copiado">Copiar correo</button>
   <a class="btn fv" data-fiverr href="#contact">Contratarme por Fiverr</a>
  </div>
  <p class="fvline">También podés contratarme por Fiverr.</p>
 </div></section>
-<footer><div class="wrap"><span>© 2026 Santiago Barberena · santiagosocceredits</span><span><a href="mailto:santiagobarberena2002@gmail.com">Email</a> · <a data-fiverr href="#contact">Fiverr</a></span></div></footer>
+<footer><div class="wrap"><span>© 2026 Santiago Barberena · santiagosocceredits</span><span><a href="mailto:santiagobarberena2002@gmail.com?body=Hola%2C%20estoy%20interesado%20en%20tu%20servicio%21">Email</a> · <a data-fiverr href="#contact">Fiverr</a></span></div></footer>
 <div class="lb" id="lb" role="dialog" aria-modal="true"><div><button aria-label="Cerrar video">✕</button><iframe id="lbf" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Video"></iframe></div></div>
 <script>
 const r=document.documentElement,h=document.querySelector('.hero'),fr=[...document.querySelectorAll('.fr')];
@@ -269,7 +269,7 @@ h.addEventListener('pointermove',e=>{const b=h.getBoundingClientRect(),x=e.clien
 addEventListener('scroll',()=>{document.getElementById('bar').style.width=(scrollY/(r.scrollHeight-innerHeight)*100)+'%'},{passive:true});
 const cp=document.getElementById('cp');cp.onclick=()=>{const t=cp.textContent;navigator.clipboard&&navigator.clipboard.writeText('santiagobarberena2002@gmail.com').then(()=>{cp.textContent=cp.dataset.ok;setTimeout(()=>cp.textContent=t,1800)})};
 
-const FIVERR='';/* ← pegar acá el link de Fiverr / paste your Fiverr URL here */
+const FIVERR='https://es.fiverr.com/san_2992?source=inbox';/* ← pegar acá el link de Fiverr / paste your Fiverr URL here */
 document.querySelectorAll('[data-fiverr]').forEach(a=>{if(FIVERR){a.href=FIVERR;a.target='_blank';a.rel='noopener'}});
 const lb=document.getElementById('lb'),fm=document.getElementById('lbf');let last;
 function shut(){lb.classList.remove('on');fm.src='';last&&last.focus()}
